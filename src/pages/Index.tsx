@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
@@ -11,6 +12,7 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <Skills />
       <Projects />
       <Education />
       <Experience />
