@@ -54,24 +54,27 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span className="text-primary text-sm font-medium tracking-[0.2em] uppercase mb-4 block">
+            Portfolio
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Mes <span className="text-gradient">Projets</span>
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
             Découvrez mes réalisations en développement de jeux Unity, du mobile casual aux game jams intenses.
           </p>
         </motion.div>
         
-        <div className="grid gap-8 lg:gap-12">
+        <div className="space-y-24 lg:space-y-32">
           {projects.map((project, index) => (
             <ProjectCard key={project.title} {...project} index={index} />
           ))}
