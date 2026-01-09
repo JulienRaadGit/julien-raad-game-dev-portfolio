@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, Code, Building } from "lucide-react";
+import { Briefcase, Code, Building, MapPin, Calendar } from "lucide-react";
 
 const experiences = [
   {
@@ -24,6 +24,7 @@ const experiences = [
       "Corvio.xyz – Application fitness web avec OpenAI API et Firebase",
     ],
     type: "personal",
+    highlight: true,
   },
   {
     company: "Synchrone",
@@ -50,19 +51,22 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-24 px-6 bg-secondary/20">
+    <section id="experience" className="py-32 px-6 bg-gradient-to-b from-secondary/30 to-background">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span className="text-primary text-sm font-medium tracking-[0.2em] uppercase mb-4 block">
+            Parcours professionnel
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="text-gradient">Expériences</span>
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          <p className="text-muted-foreground max-w-lg mx-auto text-lg">
             Mes expériences professionnelles et projets personnels en développement.
           </p>
         </motion.div>
@@ -70,40 +74,53 @@ const Experience = () => {
         <div className="space-y-6">
           {experiences.map((exp, index) => {
             const Icon = getIcon(exp.type);
+            const isHighlight = exp.highlight;
+            
             return (
               <motion.div
                 key={`${exp.company}-${exp.period}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
-                  <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <Icon className="w-5 h-5 text-primary" />
+                <div className={`p-6 md:p-8 rounded-2xl border transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 ${
+                  isHighlight 
+                    ? 'bg-primary/5 border-primary/20' 
+                    : 'bg-card/50 border-border/50 backdrop-blur-sm'
+                }`}>
+                  <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
+                    <div className="flex items-start gap-4">
+                      <div className={`p-3 rounded-xl transition-colors ${
+                        isHighlight ? 'bg-primary/20' : 'bg-secondary group-hover:bg-primary/10'
+                      }`}>
+                        <Icon className={`w-5 h-5 ${isHighlight ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'} transition-colors`} />
                       </div>
                       <div>
-                        <h3 className="font-display text-lg font-semibold">
+                        <h3 className="font-display text-lg md:text-xl font-semibold mb-1">
                           {exp.role}
                         </h3>
-                        <p className="text-muted-foreground">
-                          {exp.company} • {exp.location}
-                        </p>
+                        <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-sm">
+                          <span className="font-medium text-foreground/80">{exp.company}</span>
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5" />
+                            {exp.location}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-sm text-muted-foreground bg-secondary px-3 py-1 rounded-full">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-secondary/80 px-3 py-1.5 rounded-full">
+                      <Calendar className="w-3.5 h-3.5" />
                       {exp.period}
-                    </span>
+                    </div>
                   </div>
 
-                  <ul className="space-y-2 ml-16">
+                  <ul className="space-y-2.5 ml-0 md:ml-16">
                     {exp.description.map((item, i) => (
                       <li
                         key={i}
-                        className="text-muted-foreground text-sm flex items-start gap-2"
+                        className="text-muted-foreground text-sm flex items-start gap-3 leading-relaxed"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
                         {item}
